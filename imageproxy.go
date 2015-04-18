@@ -118,6 +118,8 @@ func (p *Proxy) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	copyHeader(w, resp, "Expires")
 	copyHeader(w, resp, "Etag")
 
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+
 	if is304 := check304(r, resp); is304 {
 		w.WriteHeader(http.StatusNotModified)
 		return
